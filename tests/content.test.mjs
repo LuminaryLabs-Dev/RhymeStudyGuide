@@ -1,0 +1,18 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {content} from '../src/content/public.mjs';
+import {validateContent} from '../src/models/validate.mjs';
+import {createRepository} from '../src/repositories/content-repository.mjs';
+import {createPageModels} from '../src/viewmodels/pages.mjs';
+import {renderPage} from '../src/views/pages.mjs';
+const clone=()=>structuredClone(content);
+test('public content validates without invented books',()=>{assert.ok(validateContent(content));assert.equal(content.books.length,0)});
+test('duplicate slugs fail',()=>{const c=clone();c.lessons.push(c.lessons[0]);assert.throws(()=>validateContent(c),/duplicate/)});
+test('private answer notes fail at the build boundary',()=>{const c=clone();c.lessons[0].answerNotes='secret';assert.throws(()=>validateContent(c),/Non-public/)});
+test('broken relationships fail',()=>{const c=clone();c.lessons[0].theme='missing';assert.throws(()=>validateContent(c),/Broken/)});
+test('repository lookups are explicit and lists cannot mutate collection order',()=>{const r=createRepository(content);assert.equal(r.find('books','missing'),null);r.all('lessons').reverse();assert.equal(r.all('lessons')[0].slug,'notice')});
+test('every ViewModel has a renderable unique route',()=>{const pages=createPageModels(createRepository(content));assert.equal(new Set(pages.map(p=>p.route)).size,pages.length);for(const p of pages){assert.match(renderPage(p),/<h1/);assert.match(renderPage(p),/rel="canonical"/)}});
+test('lesson previous and next boundaries are correct',()=>{const lessons=createPageModels(createRepository(content)).filter(p=>p.kind==='lesson');assert.equal(lessons[0].previous,null);assert.equal(lessons[2].next,null);assert.equal(lessons[0].next.slug,'connect')});
+test('all public navigation preserves project base',()=>{const pages=createPageModels(createRepository(content));for(const p of pages){assert.ok(p.link('books/').startsWith('/RhymeStudyGuide/'));assert.ok(p.link('/books/').startsWith('/RhymeStudyGuide/'))}});
+test('HTML escapes externally supplied text',()=>{const c=clone();c.themes[0].title='<img src=x onerror=alert(1)>';const p=createPageModels(createRepository(c)).find(p=>p.kind==='theme');assert.ok(!renderPage(p).includes('<img src=x'));assert.ok(renderPage(p).includes('&lt;img'))});
+test('book and chapter templates resolve approved fixture content without publishing it',()=>{const c=clone();c.books=[{slug:'test-only',title:'Test-only fixture',author:'Fixture',summary:'Not public content.',publicationApproved:true,themes:['belonging']}];c.chapters=[{slug:'opening',title:'Test chapter',book:'test-only',order:1,introduction:'A test.',questions:[{title:'A question?',hint:'A hint.'}]}];const pages=createPageModels(createRepository(c));for(const kind of ['book','book-guide','chapter','chapter-discussion']){const vm=pages.find(p=>p.kind===kind);assert.ok(vm);assert.match(renderPage(vm),/<h1/)}assert.equal(content.books.length,0)});
