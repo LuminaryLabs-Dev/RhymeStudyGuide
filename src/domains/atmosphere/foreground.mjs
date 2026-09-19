@@ -1,4 +1,4 @@
-import {flockPath} from './flock-path.mjs';
+import {flockPath,flockOrientation} from './flock-path.mjs';
 
 const birdCount=7;
 
@@ -14,11 +14,12 @@ export function mountForegroundAtmosphere(element){
   birds.forEach((bird,index)=>{
    bird.hidden=index>=count;
    if(bird.hidden)return;
-   const pose=flockPath(elapsed,index),x=50+pose.x*44,y=12+pose.y*22;
+   const pose=flockPath(elapsed,index),orientation=flockOrientation(pose.angle),x=50+pose.x*44,y=12+pose.y*22;
    bird.style.setProperty('--bird-x',`${x}%`);
    bird.style.setProperty('--bird-y',`${y}%`);
    bird.style.setProperty('--bird-scale',narrow?.42:.62);
-   bird.style.setProperty('--bird-angle',`${pose.angle}rad`);
+   bird.style.setProperty('--bird-facing',orientation.facing);
+   bird.style.setProperty('--bird-bank',`${orientation.bank}rad`);
    bird.style.setProperty('--wing-flap',`${pose.wing}rad`);
   });
  };

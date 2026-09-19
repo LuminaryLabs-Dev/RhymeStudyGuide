@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {flockPose,FLOCK_PERIOD,createFlock} from '../src/domains/atmosphere/flock.mjs';
+import {flockOrientation} from '../src/domains/atmosphere/flock-path.mjs';
 test('flock loop closes with continuous position, heading and wingbeat',()=>{
  for(let i=0;i<7;i++){
   const a=flockPose(0,i),b=flockPose(FLOCK_PERIOD,i);
@@ -12,4 +13,7 @@ test('flock loop closes with continuous position, heading and wingbeat',()=>{
 test('flock preserves separation and uses fewer visible birds on mobile',()=>{
  const flock=createFlock();flock.update(0,1.5);assert.equal(flock.group.children.filter(b=>b.visible).length,7);flock.update(0,.46);assert.equal(flock.group.children.filter(b=>b.visible).length,4);
  for(let t=0;t<60;t+=.5){const poses=Array.from({length:7},(_,i)=>flockPose(t,i));for(let i=0;i<7;i++)for(let j=i+1;j<7;j++)assert.ok(poses[i].position.distanceTo(poses[j].position)>.012);}
+});
+test('flock orientation stays upright and only banks slightly',()=>{
+ for(let i=0;i<7;i++)for(let t=0;t<FLOCK_PERIOD;t+=.125){const pose=flockPose(t,i),orientation=flockOrientation(Math.atan2(pose.tangent.y,pose.tangent.x));assert.ok(Math.abs(orientation.bank)<=.16);assert.ok(Math.abs(pose.bank)<=.16);assert.ok(Math.abs(pose.facing)===1);}
 });

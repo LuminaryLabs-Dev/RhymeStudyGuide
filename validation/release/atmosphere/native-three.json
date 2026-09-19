@@ -1,7 +1,7 @@
 {
   "passed": true,
   "flockLoopFrameMatches": true,
-  "flockSha256": "1b5be78ceb2b1eafadb6dd03acdae3524e8ad3c9ba2c6911a304bba1d02db262",
+  "flockSha256": "5661ede190a0c62558b521b851bef2971c64df573da3bc7d553bb063563ba380",
   "renderer": "@headless-three/renderer 0.4.3 — native WGPU/Vulkan",
   "three": "186",
   "adapter": "Mesa Lavapipe",

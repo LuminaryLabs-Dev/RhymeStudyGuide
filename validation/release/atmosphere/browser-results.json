@@ -50,6 +50,8 @@
     "Three generated transparent clouds load",
     "Foreground atmosphere sits above the reader and passes clicks through",
     "Desktop foreground flock has seven birds",
+    "Bird rigs use separate body and wing parts",
+    "Birds stay upright with limited banking",
     "Clouds drift while motion is enabled",
     "Pause motion freezes cloud position",
     "Hidden document freezes clouds",

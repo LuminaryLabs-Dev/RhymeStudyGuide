@@ -1,3 +1,9 @@
+# 2.5.0 — Upright flock orientation
+
+- Kept browser and native birds upright while following the curved flight path.
+- Added horizontal facing flips and limited ±0.16 rad banking instead of applying the full tangent rotation.
+- Added shared orientation tests and browser checks for layered bird rigs and safe banking.
+
 # 2.4.0 — Layered bird rig
 
 - Added a generated transparent bird sprite sheet with separately exported body and wing parts.

@@ -3,7 +3,7 @@
   "assets": [
     {
       "path": "assets/atmosphere.css",
-      "bytes": 2466
+      "bytes": 2493
     },
     {
       "path": "assets/botanical.webp",
@@ -15,7 +15,7 @@
     },
     {
       "path": "assets/explorer.js",
-      "bytes": 13497
+      "bytes": 13703
     },
     {
       "path": "assets/favicon.svg",
