@@ -1,3 +1,10 @@
+# 2.3.0 — Foreground atmosphere
+
+- Moved transparent clouds and birds into a fixed foreground layer above the reader.
+- Kept the foreground non-interactive so book controls remain clickable.
+- Constrained clouds and the flock to the upper half of the viewport.
+- Preserved reduced motion, pause, hidden-tab, mobile, and native rendering behavior.
+
 # 2.2.0 — Clouds and a looping flock
 
 - Added three generated transparent cloud layers below the reading interface.

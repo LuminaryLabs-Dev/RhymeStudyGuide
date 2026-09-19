@@ -12,10 +12,10 @@
     1200,
     800
   ],
-  "bytes": 27940,
+  "bytes": 27487,
   "deterministic": true,
-  "sha256": "ce17872d2ebca39b4ef3da087b9227c14a58a7d9f026a4d9fefc56331b4099e9",
-  "animatedFrameSha256": "f3899afc967075e921ed2e483b20ea25cb6d75a27f693f9b89881a3728ddc121",
+  "sha256": "42f5fe8a694bd0fe15d4ecf5e401e38f1d84770364031588f7787bd944048d36",
+  "animatedFrameSha256": "8984cb04e966f0db53626140c047ac56e0dee5a6e6cf69f5b3a974dc56769fc5",
   "productionScene": "src/domains/atmosphere/world.mjs",
   "systemFilesModified": false
 }

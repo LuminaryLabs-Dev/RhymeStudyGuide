@@ -1,12 +1,19 @@
-/* All atmosphere remains inside the world-art stacking context, below live UI. */
-.world-art .cloud-layers{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.world-art .cloud{position:absolute;inset:auto;object-fit:contain;height:auto;max-width:none;animation:cloud-drift linear infinite;animation-play-state:paused;will-change:transform}
-.world-art .cloud-bank{width:58vw;left:0;bottom:-6%;opacity:.24;animation-duration:150s;animation-delay:-28s}
-.world-art .cloud-wisp{width:66vw;left:0;bottom:20%;opacity:.16;animation-duration:190s;animation-delay:-110s}
-.world-art .cloud-cluster{width:40vw;left:0;bottom:1%;opacity:.19;animation-duration:120s;animation-delay:-72s}
+/* Transparent foreground atmosphere sits above the reader while passing clicks through. */
+.foreground-atmosphere{position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none;isolation:isolate}
+.foreground-atmosphere .cloud-layers{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.foreground-atmosphere .cloud{position:absolute;inset:auto;object-fit:contain;height:auto;max-width:none;animation:cloud-drift linear infinite;animation-play-state:paused;will-change:transform;filter:drop-shadow(0 8px 12px #06172628)}
+.foreground-atmosphere .cloud-bank{width:58vw;left:0;top:8%;opacity:.16;animation-duration:150s;animation-delay:-28s}
+.foreground-atmosphere .cloud-wisp{width:66vw;left:0;top:27%;opacity:.12;animation-duration:190s;animation-delay:-110s}
+.foreground-atmosphere .cloud-cluster{width:40vw;left:0;top:3%;opacity:.13;animation-duration:120s;animation-delay:-72s}
 @keyframes cloud-drift{from{transform:translateX(-100%)}to{transform:translateX(100vw)}}
-html[data-motion=on]:not([data-document-hidden=true]):not([data-layout=standard]) .cloud{animation-play-state:running}
-/* Override the reader's blanket animation:none rule to freeze clouds in place. */
-html[data-motion=off] .cloud{animation-name:cloud-drift!important;animation-play-state:paused!important}
-@media(prefers-reduced-motion:reduce){html .cloud{animation-name:cloud-drift!important;animation-play-state:paused!important}}
-@media(max-width:700px){.world-art .cloud-bank{width:110vw;bottom:2%;opacity:.16}.world-art .cloud-wisp{display:none}.world-art .cloud-cluster{width:85vw;bottom:30%;opacity:.1}}
+.foreground-birds{position:absolute;inset:0;width:100%;height:50%;overflow:visible;pointer-events:none;fill:#031626;filter:drop-shadow(0 1px 2px #f2dfad55)}
+.foreground-bird{transform-box:fill-box;transform-origin:center;opacity:.82}
+.bird-wing{transform-box:fill-box;transform-origin:0 0;animation:bird-wingbeat .72s ease-in-out infinite alternate}
+.bird-wing-right{animation-delay:-.24s}
+.foreground-bird:nth-child(2) .bird-wing{animation-delay:-.13s}.foreground-bird:nth-child(3) .bird-wing{animation-delay:-.31s}.foreground-bird:nth-child(4) .bird-wing{animation-delay:-.47s}
+@keyframes bird-wingbeat{from{transform:rotate(-.36rad)}to{transform:rotate(.32rad)}}
+html[data-motion=on]:not([data-document-hidden=true]):not([data-layout=standard]) .foreground-atmosphere .cloud{animation-play-state:running}
+html[data-motion=off] .foreground-atmosphere .cloud,.foreground-atmosphere[data-paused=true] .cloud{animation-play-state:paused!important}
+html[data-motion=off] .foreground-atmosphere .bird-wing,.foreground-atmosphere[data-paused=true] .bird-wing{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){html .foreground-atmosphere .cloud,html .foreground-atmosphere .bird-wing{animation-play-state:paused!important}}
+@media(max-width:700px){.foreground-atmosphere .cloud-bank{width:110vw;top:8%;opacity:.11}.foreground-atmosphere .cloud-wisp{display:none}.foreground-atmosphere .cloud-cluster{width:85vw;top:25%;opacity:.08}.foreground-birds{height:48%}}

@@ -1,4 +1,5 @@
 import {bindSelectionInput} from './input.mjs';
+import {mountForegroundAtmosphere} from '../atmosphere/foreground.mjs';
 import {volumes} from './catalog.mjs';
 import {ExplorerViewModel} from './view-model.mjs';
 const root=document.documentElement;
@@ -7,9 +8,9 @@ const $$=selector=>[...document.querySelectorAll(selector)];
 const vm=new ExplorerViewModel(volumes,location.hash);
 const thumbs=$$('[data-volume]'),covers=$$('[data-cover]'),panels=$$('.volume-panel');
 const dialog=$('dialog'),reduced=matchMedia('(prefers-reduced-motion:reduce)');
-let active=-1,view='',settleTimer,world,worldPromise;
+let active=-1,view='',settleTimer,world,worldPromise,foreground;
 root.classList.add('js');
-const syncVisibility=()=>root.dataset.documentHidden=String(document.hidden);
+const syncVisibility=()=>{root.dataset.documentHidden=String(document.hidden);foreground?.setPaused(document.hidden||vm.state.motionOff||root.dataset.layout==='standard');};
 document.addEventListener('visibilitychange',syncVisibility);syncVisibility();
 function remember(){if(location.hash!==vm.hash)history.pushState(null,'',vm.hash);}
 function select(index){if(vm.select(index))remember();}
@@ -18,7 +19,7 @@ function centerThumb(index){const strip=$('.thumbnail-strip'),thumb=thumbs[index
 vm.subscribe(state=>{
  const changed=active!==state.activeIndex;
  if(changed&&active>=0&&!state.motionOff){
-  $('.departing-cover')?.remove();
+  $$('.departing-cover').forEach(element=>element.remove());
   const previous=covers[active],rect=previous.getBoundingClientRect(),ghost=previous.cloneNode(true);
   ghost.removeAttribute('data-cover');ghost.className='departing-cover';ghost.setAttribute('aria-hidden','true');
   ghost.style.width=`${rect.width}px`;ghost.style.height=`${rect.height}px`;
@@ -47,7 +48,7 @@ $('[data-previous]').addEventListener('click',()=>select(active-1));
 $('[data-next]').addEventListener('click',()=>select(active+1));
 $$('header [data-view]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();show(link.dataset.view);}));
 $$('details').forEach(detail=>detail.addEventListener('toggle',()=>{if(!detail.closest('[hidden]')&&detail.open!==vm.state.expanded)vm.update({expanded:detail.open});}));
-function layout(standard){root.dataset.layout=standard?'standard':'visual';if(!standard)window.scrollTo(0,0);world?.setPaused(standard||vm.state.motionOff);}
+function layout(standard){root.dataset.layout=standard?'standard':'visual';if(!standard)window.scrollTo(0,0);world?.setPaused(standard||vm.state.motionOff);foreground?.setPaused(standard||vm.state.motionOff);}
 $('[data-standard]').addEventListener('click',event=>{event.preventDefault();history.pushState(null,'','#standard');layout(true);$('[data-return]').focus();});
 $('[data-return]').addEventListener('click',()=>{layout(false);remember();$('[data-standard]').focus();});
 function restore(){layout(location.hash==='#standard');vm.readHash(location.hash);}
@@ -73,7 +74,7 @@ async function motion(){
  const off=reduced.matches||storage.get()==='off';vm.update({motionOff:off});root.dataset.motion=off?'off':'on';
  const button=$('.motion-control');button.disabled=reduced.matches;button.setAttribute('aria-pressed',String(off));button.textContent=reduced.matches?'Reduced motion':off?'Enable motion':'Pause motion';
  if(!off&&!world){worldPromise??=import('../atmosphere/world-renderer.mjs').then(({mountWorld})=>mountWorld($('#world-canvas'))).catch(()=>{root.dataset.webgl='fallback';return null;});world=await worldPromise;}
- world?.setPaused(vm.state.motionOff||root.dataset.layout==='standard');
+ world?.setPaused(vm.state.motionOff||root.dataset.layout==='standard');foreground?.setPaused(vm.state.motionOff||root.dataset.layout==='standard'||document.hidden);
 }
 $('.motion-control').addEventListener('click',()=>{storage.set(vm.state.motionOff?'on':'off');motion();});
 reduced.addEventListener('change',motion);motion();
@@ -82,4 +83,4 @@ $('.cover-stage').addEventListener('pointerleave',()=>world?.setPointer(0,0));
 $$('img').forEach(img=>{const fallback=()=>{if(img.dataset.fallback)return;img.dataset.fallback='true';img.src=new URL('assets/world/fallback.svg',document.baseURI).href;};img.addEventListener('error',fallback);if(img.complete&&!img.naturalWidth)fallback();});
 addEventListener('resize',()=>centerThumb(active));
 bindSelectionInput({surface:$('.reader-shell'),enabled:()=>vm.state.view==='volumes'&&!vm.state.chooserOpen&&root.dataset.layout!=='standard',step:delta=>select(active+delta)});
-root.dataset.explorer='ready';
+foreground=mountForegroundAtmosphere($('.foreground-atmosphere'));foreground.setPaused(vm.state.motionOff||root.dataset.layout==='standard'||document.hidden);root.dataset.explorer='ready';

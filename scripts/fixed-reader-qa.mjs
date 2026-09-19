@@ -72,7 +72,7 @@ try{
  }
  if(pass>=5){
   await page.setViewportSize({width:1536,height:1024});await page.goto(base,{waitUntil:'networkidle'});
-  check('Three generated transparent clouds load',await page.locator('.cloud').evaluateAll(images=>images.length===3&&images.every(img=>img.complete&&img.naturalWidth>0)));
+  check('Three generated transparent clouds load',await page.locator('.cloud').evaluateAll(images=>images.length===3&&images.every(img=>img.complete&&img.naturalWidth>0)));check('Foreground atmosphere sits above the reader and passes clicks through',await page.locator('.foreground-atmosphere').evaluate(el=>getComputedStyle(el).zIndex==='20'&&getComputedStyle(el).pointerEvents==='none'));check('Desktop foreground flock has seven birds',await page.locator('.foreground-bird').evaluateAll(birds=>birds.filter(bird=>!bird.hidden).length===7));
   const position=()=>page.locator('.cloud-bank').evaluate(el=>getComputedStyle(el).transform);
   const initial=await position();await page.waitForTimeout(350);check('Clouds drift while motion is enabled',initial!==await position());
   await page.locator('.motion-control').click();const paused=await position();await page.waitForTimeout(350);check('Pause motion freezes cloud position',paused===await position());
@@ -85,7 +85,7 @@ try{
   await page.emulateMedia({reducedMotion:'no-preference'});await capture('atmosphere-desktop');
   check('Atmosphere cannot intercept reading controls',await page.locator('.world-art').evaluate(el=>getComputedStyle(el).pointerEvents==='none'));
   await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);
-  check('Mobile reduces clouds to two layers',await page.locator('.cloud').evaluateAll(images=>images.filter(el=>getComputedStyle(el).display!=='none').length===2));await capture('atmosphere-mobile');
+  check('Mobile reduces clouds to two layers',await page.locator('.cloud').evaluateAll(images=>images.filter(el=>getComputedStyle(el).display!=='none').length===2));check('Mobile foreground flock has four birds',await page.locator('.foreground-bird').evaluateAll(birds=>birds.filter(bird=>!bird.hidden).length===4));await capture('atmosphere-mobile');
  }
  check('No uncaught browser errors',errors.length===0);
 }catch(error){errors.push(error.stack);await page.screenshot({path:path.join(output,'failure.png')});}

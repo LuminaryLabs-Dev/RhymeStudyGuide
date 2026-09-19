@@ -1,9 +1,11 @@
-# Clouds and flock — 2.2.0
+# Foreground atmosphere review — 2.3.0
 
-Baseline: 08a8196dfbe07517d8a912b1d79c74851f1f1196.
+Baseline: 52dc80eed125d1af283d05b45fe01ee33f8ad08d.
 
-54 local Chromium checks passed, including the existing reader tests, cloud loading, motion/pause, reduced motion, hidden-document freezing, pointer isolation and mobile cloud reduction. Seventeen unit/content tests passed, including flock spacing and seamless path/heading/wingbeat checks. Forty static routes and 905 links passed.
+The clouds and birds now occupy a fixed transparent foreground overlay across the upper half of the viewport. The overlay is above the book and reading panel visually and uses `pointer-events: none` so every control remains clickable.
 
-The actual production Three.js scene rendered through native WGPU/Vulkan on Mesa Lavapipe. Repeated still frames match, animated frames differ, and isolated flock renders at 0 and 60 seconds match exactly. The isolated flock image uses a neutral light background to make the silhouettes inspectable. Browser screenshots show the transparent cloud artwork within the actual localhost site; native rendering verifies the bird geometry, not the DOM cloud images.
+The local browser suite passed 56 checks, including the existing reader tests, foreground z-index and pointer pass-through, cloud loading and drift, pause motion, reduced motion, hidden-document freezing, desktop/mobile bird counts, overlap, and all existing reader interactions. Seventeen unit/content tests passed. Forty static routes and 905 links passed.
 
-No automated accessibility violations or uncaught browser errors. Physical-device, screen-reader, Safari and Firefox behavior was not tested. Generated image prompts and production asset paths are in docs/assets.md.
+The actual Three.js scene rendered through native WGPU/Vulkan on Mesa Lavapipe. The shared flock path renders at the same pose at the loop boundary, with deterministic native output. Browser captures validate the transparent image and SVG foreground layer; native rendering validates the shared path and Three.js flock helper.
+
+Physical-device, screen-reader, Safari and Firefox behavior was not tested.

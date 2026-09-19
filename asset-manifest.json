@@ -3,7 +3,7 @@
   "assets": [
     {
       "path": "assets/atmosphere.css",
-      "bytes": 1387
+      "bytes": 2471
     },
     {
       "path": "assets/botanical.webp",
@@ -15,7 +15,7 @@
     },
     {
       "path": "assets/explorer.js",
-      "bytes": 11553
+      "bytes": 13390
     },
     {
       "path": "assets/favicon.svg",
@@ -50,8 +50,8 @@
       "bytes": 225458
     },
     {
-      "path": "assets/rhyme-world-renderer-ZKG5D4F5.js",
-      "bytes": 547652
+      "path": "assets/rhyme-world-renderer-KITZ2NJD.js",
+      "bytes": 541064
     },
     {
       "path": "assets/site.css",
