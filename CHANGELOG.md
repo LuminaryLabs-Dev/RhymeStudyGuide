@@ -1,3 +1,10 @@
+# 2.1.0 — Fixed visual reader
+
+- Grouped volume behavior and decorative atmosphere by domain.
+- Added a large flat selected cover, fixed-screen views, deliberate scroll selection, and a standard reading layout.
+- Preserved forty static routes, reduced motion, no-JavaScript reading and root deployment.
+- Reviewed through five evidence-led passes; see validation/release/fixed-reader.
+
 # Changelog
 
 ## 2.0.0 — 2026-09-19

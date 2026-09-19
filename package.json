@@ -1,6 +1,6 @@
 {
   "name": "rhyme-study-guide",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "A static, progressively enhanced MVVM reading experience",
@@ -12,7 +12,7 @@
     "test": "node --test tests/*.test.mjs",
     "validate": "node scripts/validate.mjs",
     "start": "node scripts/serve.mjs",
-    "test:browser": "node scripts/explorer-qa.mjs",
+    "test:browser": "node scripts/fixed-reader-qa.mjs",
     "test:render": "node scripts/render-world.mjs"
   },
   "dependencies": {

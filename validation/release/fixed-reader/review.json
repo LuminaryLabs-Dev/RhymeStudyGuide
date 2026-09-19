@@ -1,0 +1,84 @@
+{
+  "run": "fixed-reader-20260919",
+  "target": "Homepage volume selection domain",
+  "baseline": "3cb1f33d3c6fb086c0916bec3e227ff086a69648",
+  "authority": "Local source and evidence; publish main authorized by user",
+  "budget": 5,
+  "route": "mixed, direct pass-it loop with review-feedback-it",
+  "protected": [
+    "40 reading routes",
+    "MVVM",
+    "no fabricated metadata",
+    "no-JS links",
+    "reduced motion",
+    "static root build"
+  ],
+  "attempts": [
+    {
+      "pass": 1,
+      "input": "3cb1f33d3c6fb086c0916bec3e227ff086a69648",
+      "objective": "Group book behavior by domain without changing behavior",
+      "output": "43423ef58b7766755cfba085dee26828ed6113e06922259fcbc89bc201d00b4e",
+      "evidence": "pass-1-checks.json; before-desktop.webp; before-mobile.webp",
+      "observed": "43 browser checks, 13 tests and 40-route validation pass; source references resolve in domain folders",
+      "regressions": [],
+      "decision": "accept",
+      "next": "Replace the angled scrolling homepage with a fixed flat-cover composition"
+    },
+    {
+      "pass": 2,
+      "input": "43423ef58b7766755cfba085dee26828ed6113e06922259fcbc89bc201d00b4e",
+      "objective": "Make the selected flat cover the focal point in a fixed viewport",
+      "output": "302e339baba76c3d8e7e4fd025a34ff1e27cf17b3af2bcef8f711e7dccdfc8cc",
+      "evidence": "pass-2-results.json; pass-2-desktop.webp; pass-2-mobile.webp",
+      "observed": "Inspected desktop and mobile renders: complete flat cover and separate readable summary; 12 selection/history/view checks pass. Corrected mobile intrinsic image sizing during construction.",
+      "regressions": [],
+      "decision": "accept"
+    },
+    {
+      "pass": 3,
+      "input": "302e339baba76c3d8e7e4fd025a34ff1e27cf17b3af2bcef8f711e7dccdfc8cc",
+      "objective": "Make scroll gestures deliberate and transitions settle flat",
+      "output": "3a92ed45ed2fdbd009c09093b7e908915782323a754327afd192637420cb3783",
+      "evidence": "pass-3-results.json; pass-3-desktop.webp; pass-3-mobile.webp",
+      "observed": "Wheel burst and reading-panel isolation checks pass; all cover, counter, summary and history checks pass. Inspected unchanged flat desktop composition. Transition classes are removed after settling. Browser wheel dispatch requires awaiting delivered events in QA.",
+      "regressions": [],
+      "decision": "accept"
+    },
+    {
+      "pass": 4,
+      "input": "3a92ed45ed2fdbd009c09093b7e908915782323a754327afd192637420cb3783",
+      "objective": "Keep the full cover and controls usable on short screens and touch devices",
+      "output": "6eb7897350f7b0410448d5659c013f67489be292eee3e27b00aff6f39bb5333c",
+      "evidence": "pass-4-results.json; pass-4-desktop.webp; pass-4-mobile.webp",
+      "observed": "37 checks pass, including seven viewport sizes, full-cover proportions, real touch swipe, chooser focus, reduced motion, and standard layout. Mobile render inspected; small-height rules replace thumbnails with All volumes.",
+      "regressions": [],
+      "decision": "accept"
+    },
+    {
+      "pass": 5,
+      "input": "6eb7897350f7b0410448d5659c013f67489be292eee3e27b00aff6f39bb5333c",
+      "objective": "Resolve accessibility and rapid-input regressions and verify the complete reader",
+      "output": "ecb6f744b92430f1ce3435c397141a6fda969ce1959755fcb0140b08d190bc2d",
+      "evidence": "pass-5-results.json; pass-5-desktop.webp; pass-5-mobile.webp",
+      "observed": "47 browser checks pass, zero automated accessibility violations. Fixed root/navigation selector collision and a duplicate renderer initialization risk. Inspected desktop, mobile, short-phone and landscape captures. Fifteen unit tests, 40 pages / 902 links, and native Three.js render pass.",
+      "regressions": [],
+      "decision": "accept"
+    }
+  ],
+  "spent": 5,
+  "remaining": 0,
+  "best": "ecb6f744b92430f1ce3435c397141a6fda969ce1959755fcb0140b08d190bc2d",
+  "status": "complete",
+  "accepted": 5,
+  "rejected": 0,
+  "limitations": [
+    "Chromium automated desktop/mobile emulation, not physical device or Safari/Firefox validation",
+    "Book-specific summaries require approved content",
+    "web-it skill not found; not claimed as used"
+  ],
+  "next_improvements": [
+    "Replace concept covers and general reading focuses when approved book material arrives",
+    "Validate the experience with physical trackpads and mobile devices"
+  ]
+}

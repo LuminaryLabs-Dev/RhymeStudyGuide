@@ -18,9 +18,9 @@ for(const [i,v] of pages.entries()){
 await mkdir(path.join(root,'assets'),{recursive:true});
 await copyFile(path.join(root,'src/styles/site.css'),path.join(root,'assets/site.css'));
 await copyFile(path.join(root,'src/services/site.js'),path.join(root,'assets/site.js'));
-await copyFile(path.join(root,'src/styles/explorer.css'),path.join(root,'assets/explorer.css'));
+await copyFile(path.join(root,'src/domains/volumes/style.css'),path.join(root,'assets/explorer.css'));
 for(const name of await readdir(path.join(root,'assets')))if(/^rhyme-world-renderer-[A-Z0-9]+\.js$/.test(name))await unlink(path.join(root,'assets',name));
-await build({entryPoints:[path.join(root,'src/services/explorer.mjs')],outdir:path.join(root,'assets'),bundle:true,format:'esm',splitting:true,minify:true,entryNames:'explorer',chunkNames:'rhyme-[name]-[hash]',target:['es2022'],legalComments:'eof'});
+await build({entryPoints:[path.join(root,'src/domains/volumes/controller.mjs')],outdir:path.join(root,'assets'),bundle:true,format:'esm',splitting:true,minify:true,entryNames:'explorer',chunkNames:'rhyme-[name]-[hash]',target:['es2022'],legalComments:'eof'});
 await writeFile(path.join(root,'.nojekyll'),'');
 const urls=pages.filter(p=>p.kind!=='not-found').map(p=>`${content.site.origin}${content.site.base}${p.route}`);
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(url=>`<url><loc>${url}</loc></url>`).join('')}</urlset>`);

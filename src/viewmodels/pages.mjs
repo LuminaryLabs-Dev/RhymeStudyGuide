@@ -1,4 +1,4 @@
-import {volumes} from '../content/volumes.mjs';
+import {volumes} from '../domains/volumes/catalog.mjs';
 export function createPageModels(repo) {
   const link = route => repo.site.base + route.replace(/^\//,'');
   const lessonCard = l => ({...l, href:link(`study-guide/reading-practice/${l.slug}/`)});

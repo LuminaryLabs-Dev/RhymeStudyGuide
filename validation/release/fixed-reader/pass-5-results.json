@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    "Default volume is 01",
+    "Three.js atmosphere ready",
+    "All 12 selections synchronize full cover, panel and URL",
+    "Last volume is bounded",
+    "Keyboard Home and first boundary",
+    "Keyboard next",
+    "Back restores selection",
+    "Forward restores selection",
+    "Refresh retains selection",
+    "All supporting views switch within fixed viewport",
+    "All volumes chooser selects directly",
+    "Wheel selects previous",
+    "Trackpad momentum advances once per gesture",
+    "New gesture selects next",
+    "Reading panel wheel does not select books",
+    "Selected cover settles flat",
+    "Viewport stays fixed at 320x568",
+    "Whole cover visible at 320x568",
+    "Viewport stays fixed at 390x844",
+    "Whole cover visible at 390x844",
+    "Viewport stays fixed at 768x900",
+    "Whole cover visible at 768x900",
+    "Viewport stays fixed at 1024x768",
+    "Whole cover visible at 1024x768",
+    "Viewport stays fixed at 1440x900",
+    "Whole cover visible at 1440x900",
+    "Viewport stays fixed at 1920x1080",
+    "Whole cover visible at 1920x1080",
+    "Viewport stays fixed at 844x390",
+    "Whole cover visible at 844x390",
+    "Dialog traps focus",
+    "Escape restores chooser focus",
+    "Standard layout can scroll",
+    "Visual layout restored",
+    "Reduced motion selection is immediate",
+    "Real touch swipe selects next book",
+    "Read more expands and persists",
+    "New selection closes expanded reading",
+    "Rapid selections settle on latest book",
+    "Invalid deep link safely selects 01",
+    "Image and WebGL failure preserve book selection",
+    "Automated desktop and mobile accessibility checks",
+    "No-JavaScript companion links work",
+    "All 40 static pages render on mobile",
+    "Discussion interaction retained",
+    "Reading notes retained",
+    "No uncaught browser errors"
+  ],
+  "errors": [],
+  "audits": [
+    {
+      "width": 1536,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "violations": []
+    }
+  ]
+}

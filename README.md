@@ -1,6 +1,6 @@
 # Rhyme Study Guide
 
-An illustrated, animated reading companion for Dylan’s Books, with a twelve-volume explorer and forty static pages.
+An illustrated, animated reading companion for Dylan’s Books, with a fixed-screen twelve-volume reader and forty static pages.
 
 Live target: https://luminarylabs-dev.github.io/RhymeStudyGuide/
 
@@ -32,4 +32,4 @@ See `docs/architecture.md`, `docs/content-authoring.md`, `docs/deployment.md`, a
 
 ## Illustrated volume explorer
 
-The homepage uses MVVM selection, twelve generated cover concepts, native mobile swipe, keyboard controls, deep links, a layered Three.js scene, and a reduced-motion option. Each volume has a permanent reading-companion page. No official book titles or summaries were supplied; original reading focuses are explicitly distinguished from book-specific content. See `docs/volume-explorer.md` and `validation/release/` for architecture and verification evidence.
+The homepage uses MVVM selection, twelve generated cover concepts, deliberate wheel and touch selection, keyboard controls, deep links, a layered Three.js scene, and a reduced-motion option. Each volume has a permanent reading-companion page. No official book titles or summaries were supplied; original reading focuses are explicitly distinguished from book-specific content. See `docs/volume-explorer.md` and `validation/release/` for architecture and verification evidence.

@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {createWorldScene} from '../scene/world.mjs';
+import {createWorldScene} from './world.mjs';
 export function mountWorld(canvas){
  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor(0x061726,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
  const world=createWorldScene();let paused=false,visible=true,raf=0,last=0,elapsed=0,px=0,py=0,disposed=false;

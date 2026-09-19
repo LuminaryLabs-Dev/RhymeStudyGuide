@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "checks": [
+    "Default volume is 01",
+    "Three.js atmosphere ready",
+    "All 12 selections synchronize full cover, panel and URL",
+    "Last volume is bounded",
+    "Keyboard Home and first boundary",
+    "Keyboard next",
+    "Back restores selection",
+    "Forward restores selection",
+    "Refresh retains selection",
+    "All supporting views switch within fixed viewport",
+    "All volumes chooser selects directly",
+    "Wheel selects previous",
+    "Trackpad momentum advances once per gesture",
+    "New gesture selects next",
+    "Reading panel wheel does not select books",
+    "Selected cover settles flat",
+    "No uncaught browser errors"
+  ],
+  "errors": [],
+  "audits": []
+}

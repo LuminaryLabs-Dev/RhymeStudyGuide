@@ -1,59 +1,34 @@
-# Rhyme Study Guide — volume explorer
+# Rhyme Study Guide — fixed visual reader
 
-## Delivered experience
+The homepage fits one viewport. Volume 01 is selected on entry; `#volume-01` through `#volume-12` restore a selection. A complete, flat cover sits beside its reading focus on desktop and above it on mobile. Thumbnails, arrows, keyboard arrows, wheel gestures, and cover swipes issue the same selection command. The cover and summary settle after roughly 480 ms; reduced motion removes the transition.
 
-The homepage follows the approved navy, cobalt, parchment, red, and gold editorial reference. The public name is **Rhyme Study Guide**. Twelve illustrated covers form a perspective book deck. Volume 11 is initially selected to match the reference; `#volume-01` through `#volume-12` override that selection.
+Wheel input accumulates to a threshold, selects once per burst, then waits for both a 220 ms quiet gap and a 650 ms cooldown. Reading panels, menus, links, controls, and the thumbnail strip keep their own gestures. Ctrl-wheel remains available for browser zoom. A swipe begins on the cover; multiple touches cancel selection so pinch zoom remains available. The first and last volume are bounded.
 
-Every selection changes the raised cover, summary, progress marker, accessible selected state, and URL. Previous/next buttons stop at the ends. Arrow keys, Home, and End work when the carousel has focus. Mouse dragging moves one volume; mobile uses native horizontal scrolling with snapping and preserves vertical page scrolling. The detail panel can be hidden and reopened. The full-screen navigation traps focus, closes on Escape, and returns focus to its trigger.
+Volumes, Reading activities, Resources, and About are explicit views inside the shell. Supporting content and expanded reading panels can scroll internally. The document stays fixed. The standard reading layout is a normal scrolling list, also used when JavaScript is unavailable. Forty static companion and learning pages remain available at their existing routes.
 
-Twelve permanent `volumes/NN/` pages link to existing reading activities. The complete collection is rendered in HTML, so navigation and reading remain available without JavaScript. Forty static pages are generated in total.
+## Domain ownership
 
-## Content distinction
+| Source | Responsibility |
+| --- | --- |
+| `src/domains/volumes/catalog.mjs` | Public reading-focus records and asset paths |
+| `src/domains/volumes/view-model.mjs` | Selected volume, current view, expansion, transition, and hash state |
+| `src/domains/volumes/view.mjs` | Homepage and companion HTML from prepared records |
+| `src/domains/volumes/controller.mjs` | Bind DOM controls, history, focus, motion and state |
+| `src/domains/volumes/input.mjs` | Translate wheel bursts and touch swipes into selection commands |
+| `src/domains/volumes/style.css` | Fixed layout, cover sizing and responsive presentation |
+| `src/domains/atmosphere/world.mjs` | Shared Three.js scene for browser and native rendering |
+| `src/domains/atmosphere/world-renderer.mjs` | Canvas sizing, visibility, motion and WebGL lifecycle |
 
-The repository contains no approved book titles, summaries, manuscripts, or author biography. The twelve numbered entries therefore contain **original reading focuses**, not invented descriptions of Dylan’s books. Each volume page and the collection explain this distinction. The art is conceptual, not a representation of published covers. `bookTitle` and `bookSummary` remain null in the data model until approved public content is supplied. No purchase links, publication claims, or fabricated quotations are added.
+The existing content repository and page MVVM pipeline still own the other reading pages. No new framework, dependency, generic service layer, or event bus was added. Build scripts publish generated HTML and assets at the repository root.
 
-## Source ownership
+## Content boundary
 
-- `src/content/volumes.mjs`: twelve serializable reading-companion records and asset paths.
-- `src/viewmodels/explorer.mjs`: selection, boundaries, panel/menu state, URL parsing, subscription model, and prepared display records.
-- `src/views/explorer.mjs`: static homepage and volume page rendering.
-- `src/services/explorer.mjs`: DOM bindings, gestures, focus, history, motion preference, and responsive layout.
-- `src/scene/world.mjs`: shared production Three.js scene, also used by the native renderer.
-- `src/services/world-renderer.mjs`: browser WebGL lifecycle, canvas sizing, pause/resume, visibility, and context recovery.
-- `src/styles/explorer.css`: responsive deck, paper panel, parallax layers, entrance and state animations.
-
-Views do not fetch data. Models are public static records. The ViewModel owns interactive selection. Services adapt browser input to the ViewModel.
-
-## Four independent visual layers
-
-1. Ink field: dark atmospheric background with a small depth offset.
-2. Environment: generated landscape, ruins, moon, globe, and desk, optimized to WebP.
-3. Three.js objects: curved double-sided pages with individual line meshes, a faceted gold compass star, and seeded dust. Toon materials use a four-step lighting ramp.
-4. Foreground: independent transparent red and blue paint fragments and gold marks.
-
-The cards and paper panel remain live HTML above the scene. Layers respond to pointer and scroll with bounded movement. On mobile, pointer tilt is removed and the environment uses a smaller image. There is no scroll hijacking or timed barrier to reading.
-
-## Motion and lifecycle
-
-- Intro content enters progressively over approximately 0.9 seconds.
-- Card selection uses a 650 ms transform transition.
-- Summary content reveals over 450 ms with a short internal stagger.
-- Ambient pages and particles move slowly at a capped 30 frames per second.
-- Rendering pauses when the scene leaves the viewport, the tab is hidden, or motion is disabled.
-- Device reduced-motion preferences override decorative animation; a visible motion control saves the user’s choice where browser storage is available.
-- WebGL failure leaves the illustrated background and all reading functions intact.
-- No canvas or asset-loading overlay blocks navigation.
-
-## Static delivery
-
-`npm ci && npm run build` bundles the interaction controller and a separately loaded Three.js chunk using pinned dependencies. No browser requests to npm or a third-party CDN are required. Assets and HTML are committed at the existing `main / (root)` GitHub Pages source. No workflow or Pages configuration change is needed.
-
-The project URL is `https://luminarylabs-dev.github.io/RhymeStudyGuide/`. All generated internal links preserve `/RhymeStudyGuide/`. Direct volume routes work without SPA rewrites. `asset-manifest.json` lists production assets and sizes.
+The twelve entries are original reading focuses with concept cover art. They are not summaries of Dylan’s books. `bookTitle` and `bookSummary` remain null until approved public material is supplied. No manuscript, private answer notes, fabricated quotations, or purchase claims are published.
 
 ## Validation
 
-Run `npm test`, `npm run validate`, and `node scripts/explorer-qa.mjs` with `QA_MODULE_ROOT` and `QA_CHROMIUM_PATH` pointing to the external QA installation. QA starts the exact repository build on localhost and exercises real browser state, routes, accessibility, mobile layout, history, motion preferences, and fallbacks.
+Run `npm run build`, `npm test`, and `npm run validate`. Run `QA_CHROMIUM_PATH=/path/to/chromium QA_MODULE_ROOT=/path/to/browser-runtime npm run test:browser` for local interaction, viewport, fallback and accessibility checks. The external QA runtime supplies Playwright and axe; it is not part of the deployed website.
 
-`node scripts/render-world.mjs` separately validates the actual production scene through native WGPU/Vulkan using `@headless-three/renderer`. Set `RENDER_MODULE_ROOT`, `VK_ICD_FILENAMES`, `LD_LIBRARY_PATH`, `XDG_RUNTIME_DIR`, and `MESA_SHADER_CACHE_DIR` for the local rendering runtime. It compares deterministic PNG hashes and an animated frame. Browser UI screenshots are additional evidence, not a substitute for the native 3D render.
+`scripts/render-world.mjs` imports the same production scene through the native headless Three.js renderer. It checks deterministic still output and a changing animated frame. The existing Mesa/Vulkan runtime supplies that renderer; no renderer dependency is shipped to the browser.
 
-Evidence in `validation/release/` records the actual tested scope. Automated Chromium coverage does not establish testing in native Safari or Firefox, a physical device, or a screen reader.
+`validation/release/fixed-reader/` contains the five-pass review ledger, source snapshots, before/after captures and exact check results. Automated Chromium checks do not establish physical-device, screen-reader, Safari or Firefox coverage.

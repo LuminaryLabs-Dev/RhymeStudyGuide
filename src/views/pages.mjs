@@ -1,4 +1,4 @@
-import {renderExplorer,renderVolumeBody} from './explorer.mjs';
+import {renderExplorer,renderVolumeBody} from '../domains/volumes/view.mjs';
 import {esc,arrow,button,eyebrow,heading,lessonCards,themeCards,termLinks,bookCards,questions,breadcrumbs} from '../components/html.mjs';
 
 function scene(v,small=false) {return `<div class="book-scene ${small?'scene-small':''}" aria-hidden="true"><div class="scene-ring ring-one"></div><div class="scene-ring ring-two"></div><div class="scene-cross cross-one">✦</div><div class="scene-cross cross-two">✧</div><span class="orbit-label">A WORLD BETWEEN THE LINES</span><div class="scene-layer book-layer" data-depth="14"><img src="${v.link('assets/open-book.webp')}" alt="" width="1200" height="800" fetchpriority="high"></div><div class="scene-layer sprig-layer" data-depth="28"><img src="${v.link('assets/botanical.webp')}" alt="" width="600" height="900"></div><span class="scene-caption">OPEN A BOOK. OPEN A POSSIBILITY.</span></div>`;}
