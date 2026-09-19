@@ -16,7 +16,7 @@ for(const [file,html] of htmls){
   checkedLinks++;
   if(url.startsWith('#')){if(!ids.has(url.slice(1)))failures.push(`${file}: missing anchor ${url}`);continue}
   if(!url.startsWith(base)){failures.push(`${file}: incorrect base ${url}`);continue}
-  const [raw,anchor]=url.slice(base.length).split('#');const target=raw.endsWith('/')?`${raw}index.html`:raw;
+  const [raw,anchor]=url.slice(base.length).split('#');const target=(!raw||raw.endsWith('/'))?`${raw}index.html`:raw;
   try{await stat(path.join(root,target))}catch{failures.push(`${file}: broken link ${url}`)}
   if(anchor&&!htmls.get(target)?.includes(`id="${anchor}"`))failures.push(`${file}: broken fragment ${url}`);
  }

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "renderer": "@headless-three/renderer 0.4.3 \u2014 native WGPU/Vulkan",
+  "three": "186",
+  "adapter": "Mesa Lavapipe",
+  "icd": "/workspace/scratch/6972da08bfe7/render-runtime/lavapipe/usr/share/vulkan/icd.d/lvp_icd.json",
+  "package": "25.2.8-0ubuntu0.24.04.2",
+  "packageSha256": "b3be471db0ec27eb28c1ea75a4d2e6bb3207c5904bdc3823dbba9ce530026939",
+  "dimensions": [
+    1200,
+    800
+  ],
+  "bytes": 27487,
+  "deterministic": true,
+  "sha256": "42f5fe8a694bd0fe15d4ecf5e401e38f1d84770364031588f7787bd944048d36",
+  "animatedFrameSha256": "8984cb04e966f0db53626140c047ac56e0dee5a6e6cf69f5b3a974dc56769fc5",
+  "productionScene": "src/scene/world.mjs",
+  "systemFilesModified": false,
+  "distinctColors": 9,
+  "nonBackgroundPixels": 7061
+}

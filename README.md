@@ -1,14 +1,15 @@
 # Rhyme Study Guide
 
-A warm, progressively enhanced reading companion for Dylan’s Books.
+An illustrated, animated reading companion for Dylan’s Books, with a twelve-volume explorer and forty static pages.
 
 Live target: https://luminarylabs-dev.github.io/RhymeStudyGuide/
 
 ## Build and run
 
-Requires Node 22 or newer. The production build has no package dependencies or backend.
+Requires Node 22 or newer. Install the pinned Three.js and esbuild dependencies with `npm ci`. The deployed site has no backend or CDN dependencies.
 
 ```sh
+npm ci
 npm run build
 npm test
 npm run validate
@@ -28,3 +29,7 @@ The initial release includes original, general reading-practice activities, disc
 This is a **public repository and public static root**. Everything committed can be downloaded, including source and documentation. Never commit private notes, draft manuscripts, answer keys, credentials, private trackers, or Drive exports. ViewModel filtering is not access control.
 
 See `docs/architecture.md`, `docs/content-authoring.md`, `docs/deployment.md`, and `docs/assets.md`.
+
+## Illustrated volume explorer
+
+The homepage uses MVVM selection, twelve generated cover concepts, native mobile swipe, keyboard controls, deep links, a layered Three.js scene, and a reduced-motion option. Each volume has a permanent reading-companion page. No official book titles or summaries were supplied; original reading focuses are explicitly distinguished from book-specific content. See `docs/volume-explorer.md` and `validation/release/` for architecture and verification evidence.

@@ -1,4 +1,5 @@
-import {mkdir,writeFile,readFile,copyFile,unlink} from 'node:fs/promises';
+import {build} from 'esbuild';
+import {mkdir,writeFile,readFile,copyFile,unlink,readdir} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {content} from '../src/content/public.mjs';
@@ -17,9 +18,14 @@ for(const [i,v] of pages.entries()){
 await mkdir(path.join(root,'assets'),{recursive:true});
 await copyFile(path.join(root,'src/styles/site.css'),path.join(root,'assets/site.css'));
 await copyFile(path.join(root,'src/services/site.js'),path.join(root,'assets/site.js'));
+await copyFile(path.join(root,'src/styles/explorer.css'),path.join(root,'assets/explorer.css'));
+for(const name of await readdir(path.join(root,'assets')))if(/^rhyme-world-renderer-[A-Z0-9]+\.js$/.test(name))await unlink(path.join(root,'assets',name));
+await build({entryPoints:[path.join(root,'src/services/explorer.mjs')],outdir:path.join(root,'assets'),bundle:true,format:'esm',splitting:true,minify:true,entryNames:'explorer',chunkNames:'rhyme-[name]-[hash]',target:['es2022'],legalComments:'eof'});
 await writeFile(path.join(root,'.nojekyll'),'');
 const urls=pages.filter(p=>p.kind!=='not-found').map(p=>`${content.site.origin}${content.site.base}${p.route}`);
 await writeFile(path.join(root,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map(url=>`<url><loc>${url}</loc></url>`).join('')}</urlset>`);
 await writeFile(path.join(root,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${content.site.origin}${content.site.base}sitemap.xml\n`);
 await writeFile(path.join(root,'build-manifest.json'),JSON.stringify({version:1,base:content.site.base,files:routes},null,2)+'\n');
 console.log(`Built ${pages.length} static pages at repository root (${content.site.base}).`);
+
+const assetFiles=[];async function scanAssets(dir){for(const item of await readdir(dir,{withFileTypes:true})){const full=path.join(dir,item.name);if(item.isDirectory())await scanAssets(full);else assetFiles.push({path:path.relative(root,full),bytes:(await readFile(full)).length});}}await scanAssets(path.join(root,'assets'));await writeFile(path.join(root,'asset-manifest.json'),JSON.stringify({version:1,assets:assetFiles},null,2)+'\n');

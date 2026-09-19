@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "path": "assets/botanical.webp",
+      "bytes": 137908
+    },
+    {
+      "path": "assets/explorer.css",
+      "bytes": 20511
+    },
+    {
+      "path": "assets/explorer.js",
+      "bytes": 12824
+    },
+    {
+      "path": "assets/favicon.svg",
+      "bytes": 252
+    },
+    {
+      "path": "assets/fonts/DM-Sans-LICENSE.txt",
+      "bytes": 4502
+    },
+    {
+      "path": "assets/fonts/Libre-Caslon-LICENSE.txt",
+      "bytes": 4402
+    },
+    {
+      "path": "assets/fonts/dm-sans-latin-400-normal.woff2",
+      "bytes": 14200
+    },
+    {
+      "path": "assets/fonts/dm-sans-latin-500-normal.woff2",
+      "bytes": 14304
+    },
+    {
+      "path": "assets/fonts/dm-sans-latin-600-normal.woff2",
+      "bytes": 14144
+    },
+    {
+      "path": "assets/fonts/libre-caslon-display-latin-400-normal.woff2",
+      "bytes": 24236
+    },
+    {
+      "path": "assets/open-book.webp",
+      "bytes": 225458
+    },
+    {
+      "path": "assets/rhyme-world-renderer-E6HDL7JN.js",
+      "bytes": 541099
+    },
+    {
+      "path": "assets/site.css",
+      "bytes": 27137
+    },
+    {
+      "path": "assets/site.js",
+      "bytes": 5670
+    },
+    {
+      "path": "assets/volumes/volume-01-small.webp",
+      "bytes": 7138
+    },
+    {
+      "path": "assets/volumes/volume-01.webp",
+      "bytes": 34738
+    },
+    {
+      "path": "assets/volumes/volume-02-small.webp",
+      "bytes": 8664
+    },
+    {
+      "path": "assets/volumes/volume-02.webp",
+      "bytes": 48412
+    },
+    {
+      "path": "assets/volumes/volume-03-small.webp",
+      "bytes": 10546
+    },
+    {
+      "path": "assets/volumes/volume-03.webp",
+      "bytes": 52180
+    },
+    {
+      "path": "assets/volumes/volume-04-small.webp",
+      "bytes": 9400
+    },
+    {
+      "path": "assets/volumes/volume-04.webp",
+      "bytes": 47000
+    },
+    {
+      "path": "assets/volumes/volume-05-small.webp",
+      "bytes": 8442
+    },
+    {
+      "path": "assets/volumes/volume-05.webp",
+      "bytes": 38816
+    },
+    {
+      "path": "assets/volumes/volume-06-small.webp",
+      "bytes": 9088
+    },
+    {
+      "path": "assets/volumes/volume-06.webp",
+      "bytes": 41458
+    },
+    {
+      "path": "assets/volumes/volume-07-small.webp",
+      "bytes": 4870
+    },
+    {
+      "path": "assets/volumes/volume-07.webp",
+      "bytes": 24620
+    },
+    {
+      "path": "assets/volumes/volume-08-small.webp",
+      "bytes": 8536
+    },
+    {
+      "path": "assets/volumes/volume-08.webp",
+      "bytes": 39130
+    },
+    {
+      "path": "assets/volumes/volume-09-small.webp",
+      "bytes": 13504
+    },
+    {
+      "path": "assets/volumes/volume-09.webp",
+      "bytes": 61030
+    },
+    {
+      "path": "assets/volumes/volume-10-small.webp",
+      "bytes": 9998
+    },
+    {
+      "path": "assets/volumes/volume-10.webp",
+      "bytes": 48912
+    },
+    {
+      "path": "assets/volumes/volume-11-small.webp",
+      "bytes": 10084
+    },
+    {
+      "path": "assets/volumes/volume-11.webp",
+      "bytes": 49850
+    },
+    {
+      "path": "assets/volumes/volume-12-small.webp",
+      "bytes": 8282
+    },
+    {
+      "path": "assets/volumes/volume-12.webp",
+      "bytes": 41170
+    },
+    {
+      "path": "assets/world/cover-atlas.webp",
+      "bytes": 462186
+    },
+    {
+      "path": "assets/world/fallback.svg",
+      "bytes": 285
+    },
+    {
+      "path": "assets/world/fragments.svg",
+      "bytes": 456
+    },
+    {
+      "path": "assets/world/hero-mobile.webp",
+      "bytes": 41918
+    },
+    {
+      "path": "assets/world/hero.webp",
+      "bytes": 148830
+    },
+    {
+      "path": "assets/world/paper.svg",
+      "bytes": 296
+    }
+  ]
+}

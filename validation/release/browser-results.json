@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "checks": [
+    "Homepage title",
+    "Twelve volume tabs",
+    "Default volume 11",
+    "Three.js WebGL initialized",
+    "All twelve selections update card, summary, and URL",
+    "Last-volume next disabled",
+    "Previous control works",
+    "Home key and first-volume boundary",
+    "Right arrow keyboard selection",
+    "End key selects last",
+    "Back restores selected volume",
+    "Forward restores selected volume",
+    "Refresh retains deep-link selection",
+    "Deep-link refresh stays at hero",
+    "Details hide",
+    "Details reopen",
+    "Menu opens and focus enters",
+    "Menu traps keyboard focus",
+    "Menu escape restores focus",
+    "Desktop drag selects next volume",
+    "Motion toggle stops motion",
+    "Motion choice persists",
+    "Reduced motion updates live",
+    "Reduced motion remains respected",
+    "No overflow at six target viewport widths",
+    "Mobile carousel scroll selects adjacent volume",
+    "Mobile arrow recenters active card",
+    "Volume CTA leads to real companion",
+    "Companion links to real learning activity",
+    "All 40 pages render without mobile overflow",
+    "Existing discussion interaction retained",
+    "Reading notes persist",
+    "No-JavaScript volume navigation works",
+    "No-JavaScript activity navigation works",
+    "Invalid volume hash falls back to volume 11",
+    "Broken cover uses fallback",
+    "Fallback cover loads",
+    "Real touch swipe updates selection",
+    "Touch summary stays synchronized",
+    "WebGL failure preserves volume selection",
+    "WebGL fallback reported",
+    "No uncaught browser errors",
+    "No automated accessibility violations"
+  ],
+  "errors": [],
+  "a11y": [
+    {
+      "route": "home",
+      "violations": []
+    },
+    {
+      "route": "mobile-home",
+      "violations": []
+    },
+    {
+      "route": "volume",
+      "violations": []
+    }
+  ]
+}

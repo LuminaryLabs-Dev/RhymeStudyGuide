@@ -1,0 +1,16 @@
+import {createRequire} from 'node:module';
+import {writeFile,mkdir,readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import path from 'node:path';
+import * as THREE from 'three';
+import {createWorldScene} from '../src/scene/world.mjs';
+const require=createRequire(path.resolve(process.env.RENDER_MODULE_ROOT??'../render-runtime','package.json'));
+const {render}=require('@headless-three/renderer');
+const out=path.resolve('validation/runs/native-three');await mkdir(out,{recursive:true});
+const world=createWorldScene(1.5);world.scene.background=new THREE.Color('#061726');world.update(0);
+const first=render(world.scene,world.camera,{width:1200,height:800});const second=render(world.scene,world.camera,{width:1200,height:800});
+const hash=b=>createHash('sha256').update(b).digest('hex');if(hash(first)!==hash(second))throw Error('Native renderer output is not deterministic');
+await writeFile(path.join(out,'world.png'),first);world.update(3);const after=render(world.scene,world.camera,{width:1200,height:800});await writeFile(path.join(out,'world-after.png'),after);if(hash(first)===hash(after))throw Error('Scene animation did not change framebuffer');
+const smoke=new THREE.Scene();smoke.background=new THREE.Color('#061726');const cube=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshToonMaterial({color:0xd5b568}));cube.rotation.set(.3,.5,0);smoke.add(cube);const floor=new THREE.Mesh(new THREE.PlaneGeometry(6,6),new THREE.MeshStandardMaterial({color:0x123f66,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.7;smoke.add(floor);smoke.add(new THREE.AmbientLight(0xffffff,.8));const light=new THREE.DirectionalLight(0xffffff,3);light.position.set(2,4,3);smoke.add(light);const cam=new THREE.PerspectiveCamera(40,1,.1,20);cam.position.set(2,2,4);cam.lookAt(0,0,0);const smoke1=render(smoke,cam,{width:512,height:512}),smoke2=render(smoke,cam,{width:512,height:512});if(hash(smoke1)!==hash(smoke2))throw Error('Smoke output is not deterministic');await writeFile(path.join(out,'smoke-test.png'),smoke1);
+const mesa=JSON.parse(await readFile(path.resolve('../render-runtime/mesa-package.json'),'utf8'));
+const report={passed:true,renderer:'@headless-three/renderer 0.4.3 — native WGPU/Vulkan',three:THREE.REVISION,adapter:'Mesa Lavapipe',icd:process.env.VK_ICD_FILENAMES,package:mesa.Version,packageSha256:mesa.SHA256,dimensions:[1200,800],bytes:first.length,deterministic:hash(first)===hash(second),sha256:hash(first),animatedFrameSha256:hash(after),productionScene:'src/scene/world.mjs',systemFilesModified:false};await writeFile(path.join(out,'validation.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));world.dispose();

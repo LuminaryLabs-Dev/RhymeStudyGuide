@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0 — 2026-09-19
+
+- Rebuilt the homepage as the approved navy/cobalt cel-shaded Rhyme Study Guide collection.
+- Added twelve illustrated covers, volume companion pages, MVVM selection, summary transitions, deep links, responsive drag/swipe, and accessible modal navigation.
+- Added a shared Three.js scene with toon-shaded floating pages, a faceted star, dust, bounded parallax, and motion/visibility lifecycle controls.
+- Preserved all original reading activities, local notes, discussion prompts, vocabulary, themes, and printables.
+- Added automated interaction checks, native WGPU/Vulkan render evidence, responsive screenshots, and an asset manifest.
+- Kept generated output at the existing main-branch root; no workflow changes.
+- Official book metadata remains unavailable and is not invented.
+
 ## 1.0.0 — 2026-09-19
 
 - Added static MVVM generator and 28 public pages.

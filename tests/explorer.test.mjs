@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {volumes} from '../src/content/volumes.mjs';
+import {ExplorerViewModel} from '../src/viewmodels/explorer.mjs';
+test('volume navigation has boundaries and invalid selection cannot corrupt state',()=>{const vm=new ExplorerViewModel(volumes);assert.equal(vm.snapshot().volume.id,11);vm.select(0);assert.equal(vm.step(-1),false);assert.equal(vm.snapshot().canPrevious,false);vm.select(11);assert.equal(vm.step(1),false);assert.equal(vm.snapshot().canNext,false);for(const invalid of [-1,12,NaN,1.5,'2'])assert.equal(vm.select(invalid),false);assert.equal(vm.snapshot().volume.id,12);});
+test('hash navigation restores selection and handles invalid volume hashes',()=>{const vm=new ExplorerViewModel(volumes,'#volume-03');assert.equal(vm.snapshot().volume.id,3);vm.readHash('#volume-12');assert.equal(vm.hash,'#volume-12');vm.readHash('#all-volumes');assert.equal(vm.snapshot().volume.id,12);vm.readHash('#volume-99');assert.equal(vm.snapshot().volume.id,11);});
+test('companion focuses cannot masquerade as approved book summaries',()=>{assert.equal(volumes.length,12);for(const v of volumes){assert.equal(v.bookSummary,null);assert.equal(v.bookTitle,null);assert.equal(v.status,'reading-companion');assert.ok(v.summary.length>80);assert.ok(!v.route.startsWith('/'));}});

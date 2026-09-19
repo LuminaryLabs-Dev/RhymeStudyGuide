@@ -1,3 +1,4 @@
+import {volumes} from '../content/volumes.mjs';
 export function createPageModels(repo) {
   const link = route => repo.site.base + route.replace(/^\//,'');
   const lessonCard = l => ({...l, href:link(`study-guide/reading-practice/${l.slug}/`)});
@@ -38,6 +39,7 @@ export function createPageModels(repo) {
       pages.push(page(`discussion/${b.slug}/${ch.slug}/`,'chapter-discussion',ch.title,ch.introduction,{book:b,chapter:ch}));
     }
   }
+  for(const volume of volumes)pages.push(page(volume.route,'volume',`${volume.title} — ${volume.focus}`,volume.summary,{volumeId:volume.id}));
   if(new Set(pages.map(p=>p.route)).size!==pages.length)throw Error('Duplicate generated route');
   return pages;
 }
