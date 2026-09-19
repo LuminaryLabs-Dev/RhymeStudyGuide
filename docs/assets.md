@@ -16,3 +16,16 @@ Botanical: “Use case: illustration-story. Standalone foreground compositing as
 ## Cel-shaded collection (2.0.0)
 
 The hero and twelve-cover atlas were generated from the approved visual reference. `assets/world/hero.webp` is the clean scene without embedded UI. `hero-mobile.webp` is its optimized responsive export. `cover-atlas.webp` is the source for `scripts/export-covers.py`; all 12 covers have large and small WebP exports. Covers are conceptual and contain live HTML volume numbers. Transparent foreground marks and paper grain are local SVG assets. Animated paper and star meshes are constructed in `src/domains/atmosphere/world.mjs`. No image contains functional interface text.
+
+## Cloud generation — 2026-09-19
+
+Built-in image generation produced three original RGBA cloud sprites. Optimized WebP exports preserve transparency at `assets/world/cloud-bank.webp`, `cloud-wisp.webp`, and `cloud-cluster.webp` (approximately 212 KB combined).
+
+Shared prompt: “Use case: stylized-concept. Production website sprite: ONE isolated cloud shape. Bold cel-shaded editorial woodcut illustration with restrained paper grain, sophisticated ink navy/cobalt/parchment palette. Landscape canvas. Entire cloud inside frame with generous clear margins. Genuine transparent alpha background, no sky, no ground, no frame, no text, no birds. Soft feathered outer wisps but bold simplified internal shading. Designed as subtle parallax atmosphere behind a reading interface. Generate the asset, not a website mockup.”
+
+Individual subjects:
+- Bank: “Broad low cloud bank, layered navy underside and muted parchment upper rim, drifting foreground mist.”
+- Wisp: “Long slender wisp, mostly muted slate blue with small warm cream highlights, delicate tapered ends.”
+- Cluster: “Compact asymmetrical cluster of rounded clouds, cobalt and midnight blue shadows, muted cream tops.”
+
+Clouds are image assets; birds are small code-native Three.js meshes, not generated raster images.

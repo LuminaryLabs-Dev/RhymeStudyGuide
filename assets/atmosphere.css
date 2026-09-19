@@ -1,0 +1,12 @@
+/* All atmosphere remains inside the world-art stacking context, below live UI. */
+.world-art .cloud-layers{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.world-art .cloud{position:absolute;inset:auto;object-fit:contain;height:auto;max-width:none;animation:cloud-drift linear infinite;animation-play-state:paused;will-change:transform}
+.world-art .cloud-bank{width:58vw;left:0;bottom:-6%;opacity:.24;animation-duration:150s;animation-delay:-28s}
+.world-art .cloud-wisp{width:66vw;left:0;bottom:20%;opacity:.16;animation-duration:190s;animation-delay:-110s}
+.world-art .cloud-cluster{width:40vw;left:0;bottom:1%;opacity:.19;animation-duration:120s;animation-delay:-72s}
+@keyframes cloud-drift{from{transform:translateX(-100%)}to{transform:translateX(100vw)}}
+html[data-motion=on]:not([data-document-hidden=true]):not([data-layout=standard]) .cloud{animation-play-state:running}
+/* Override the reader's blanket animation:none rule to freeze clouds in place. */
+html[data-motion=off] .cloud{animation-name:cloud-drift!important;animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){html .cloud{animation-name:cloud-drift!important;animation-play-state:paused!important}}
+@media(max-width:700px){.world-art .cloud-bank{width:110vw;bottom:2%;opacity:.16}.world-art .cloud-wisp{display:none}.world-art .cloud-cluster{width:85vw;bottom:30%;opacity:.1}}

@@ -1,3 +1,10 @@
+# 2.2.0 — Clouds and a looping flock
+
+- Added three generated transparent cloud layers below the reading interface.
+- Added a small Three.js flock on a closed cubic Bézier path with staggered wingbeats and separated formation slots.
+- Reduced cloud and bird counts on mobile; pause and hidden-tab behavior freeze the current pose.
+- Preserved book selection, static root deployment and existing reading routes.
+
 # 2.1.0 — Fixed visual reader
 
 - Grouped volume behavior and decorative atmosphere by domain.

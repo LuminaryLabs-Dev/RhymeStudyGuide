@@ -11,5 +11,5 @@ export function mountWorld(canvas){
  const visibility=()=>schedule();document.addEventListener('visibilitychange',visibility);
  canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();paused=true;cancelAnimationFrame(raf);document.documentElement.dataset.webgl='fallback';});canvas.addEventListener('webglcontextrestored',()=>{paused=document.documentElement.dataset.motion==='off';resize();schedule();document.documentElement.dataset.webgl='ready';});
  resize();schedule();document.documentElement.dataset.webgl='ready';
- return{setPaused(value){paused=value;if(paused){cancelAnimationFrame(raf);raf=0;world.update(0);renderer.render(world.scene,world.camera);}else schedule();},setPointer(x,y){px=x;py=y;},dispose(){disposed=true;cancelAnimationFrame(raf);ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);world.dispose();renderer.dispose();}};
+ return{setPaused(value){paused=value;if(paused){cancelAnimationFrame(raf);raf=0;renderStill();}else schedule();},setPointer(x,y){px=x;py=y;},dispose(){disposed=true;cancelAnimationFrame(raf);ro.disconnect();io.disconnect();document.removeEventListener('visibilitychange',visibility);world.dispose();renderer.dispose();}};
 }

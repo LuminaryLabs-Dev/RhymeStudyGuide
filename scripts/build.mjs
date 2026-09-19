@@ -18,6 +18,7 @@ for(const [i,v] of pages.entries()){
 await mkdir(path.join(root,'assets'),{recursive:true});
 await copyFile(path.join(root,'src/styles/site.css'),path.join(root,'assets/site.css'));
 await copyFile(path.join(root,'src/services/site.js'),path.join(root,'assets/site.js'));
+await copyFile(path.join(root,'src/domains/atmosphere/style.css'),path.join(root,'assets/atmosphere.css'));
 await copyFile(path.join(root,'src/domains/volumes/style.css'),path.join(root,'assets/explorer.css'));
 for(const name of await readdir(path.join(root,'assets')))if(/^rhyme-world-renderer-[A-Z0-9]+\.js$/.test(name))await unlink(path.join(root,'assets',name));
 await build({entryPoints:[path.join(root,'src/domains/volumes/controller.mjs')],outdir:path.join(root,'assets'),bundle:true,format:'esm',splitting:true,minify:true,entryNames:'explorer',chunkNames:'rhyme-[name]-[hash]',target:['es2022'],legalComments:'eof'});

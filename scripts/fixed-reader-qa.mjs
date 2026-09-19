@@ -70,6 +70,23 @@ try{
   await page.goto(base+'discussion/');const old=await page.locator('.prompt-panel:visible h2').textContent();await page.locator('[data-next-prompt]').click();check('Discussion interaction retained',old!==await page.locator('.prompt-panel:visible h2').textContent());
   await page.goto(base+'study-guide/reading-practice/notice/');await page.getByLabel('What stayed with you?').fill('A detail worth revisiting.');await page.waitForTimeout(450);await page.reload();check('Reading notes retained',await page.getByLabel('What stayed with you?').inputValue()==='A detail worth revisiting.');
  }
+ if(pass>=5){
+  await page.setViewportSize({width:1536,height:1024});await page.goto(base,{waitUntil:'networkidle'});
+  check('Three generated transparent clouds load',await page.locator('.cloud').evaluateAll(images=>images.length===3&&images.every(img=>img.complete&&img.naturalWidth>0)));
+  const position=()=>page.locator('.cloud-bank').evaluate(el=>getComputedStyle(el).transform);
+  const initial=await position();await page.waitForTimeout(350);check('Clouds drift while motion is enabled',initial!==await position());
+  await page.locator('.motion-control').click();const paused=await position();await page.waitForTimeout(350);check('Pause motion freezes cloud position',paused===await position());
+  await page.locator('.motion-control').click();
+  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'));});
+  const hidden=await position();await page.waitForTimeout(350);check('Hidden document freezes clouds',hidden===await position());
+  await page.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'));});
+  await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>document.documentElement.dataset.motion==='off');
+  check('Reduced motion pauses all cloud layers',await page.locator('.cloud').evaluateAll(images=>images.every(el=>getComputedStyle(el).animationPlayState==='paused')));
+  await page.emulateMedia({reducedMotion:'no-preference'});await capture('atmosphere-desktop');
+  check('Atmosphere cannot intercept reading controls',await page.locator('.world-art').evaluate(el=>getComputedStyle(el).pointerEvents==='none'));
+  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(300);
+  check('Mobile reduces clouds to two layers',await page.locator('.cloud').evaluateAll(images=>images.filter(el=>getComputedStyle(el).display!=='none').length===2));await capture('atmosphere-mobile');
+ }
  check('No uncaught browser errors',errors.length===0);
 }catch(error){errors.push(error.stack);await page.screenshot({path:path.join(output,'failure.png')});}
 finally{await writeFile(path.join(output,'results.json'),JSON.stringify({passed:!errors.length,checks,errors,audits},null,2));await browser.close();server.kill();}

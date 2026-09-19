@@ -32,3 +32,9 @@ Run `npm run build`, `npm test`, and `npm run validate`. Run `QA_CHROMIUM_PATH=/
 `scripts/render-world.mjs` imports the same production scene through the native headless Three.js renderer. It checks deterministic still output and a changing animated frame. The existing Mesa/Vulkan runtime supplies that renderer; no renderer dependency is shipped to the browser.
 
 `validation/release/fixed-reader/` contains the five-pass review ledger, source snapshots, before/after captures and exact check results. Automated Chromium checks do not establish physical-device, screen-reader, Safari or Firefox coverage.
+
+## Clouds and birds (2.2.0)
+
+The atmosphere domain also owns `clouds.mjs`, `style.css`, and `flock.mjs`. Cloud HTML is rendered beneath the interface inside `world-art`; CSS transforms move three alpha WebP images across screen edges over 120–190 seconds. Their resets occur entirely outside the viewport. Two layers remain visible on mobile. Cloud animation pauses for reduced motion, the visible motion toggle, hidden documents and standard reading layout.
+
+Seven small mesh birds (four on narrow camera aspects) follow two joined cubic Bézier segments in a closed 60-second path. Path tangents align the flock, phase offsets create cohesion, and alternating lateral slots maintain separation without a simulation or new dependency. Staggered wingbeats also close on the same period. This is a lightweight guided flock, not a general-purpose boids simulation. Native Three.js validates the actual bird meshes; local browser captures validate the image-based cloud layers and their placement beneath readable HTML.

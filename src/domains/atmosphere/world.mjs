@@ -1,8 +1,10 @@
 import * as THREE from 'three';
+import {createFlock} from './flock.mjs';
 // Shared production scene: imported by browser and native headless validation.
 export function createWorldScene(aspect=1.5){
  const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(38,aspect,.1,100);camera.position.set(0,0,15);
  const root=new THREE.Group();scene.add(root);
+ const flock=createFlock();scene.add(flock.group);
  const steps=new Uint8Array([75,150,235,255]);const gradient=new THREE.DataTexture(steps,4,1,THREE.RedFormat);gradient.needsUpdate=true;gradient.minFilter=gradient.magFilter=THREE.NearestFilter;
  const paper=new THREE.MeshToonMaterial({color:0xf1dfb5,gradientMap:gradient,side:THREE.DoubleSide});
  const ink=new THREE.MeshBasicMaterial({color:0x314352,side:THREE.DoubleSide});
@@ -20,6 +22,6 @@ export function createWorldScene(aspect=1.5){
  const positionsArray=new Float32Array(60*3);for(let i=0;i<60;i++){positionsArray[i*3]=(rand()-.2)*13;positionsArray[i*3+1]=(rand()-.4)*10;positionsArray[i*3+2]=-rand()*5;}
  const particlesGeometry=new THREE.BufferGeometry();particlesGeometry.setAttribute('position',new THREE.BufferAttribute(positionsArray,3));const particles=new THREE.Points(particlesGeometry,new THREE.PointsMaterial({color:0xd4bd82,size:.017,transparent:true,opacity:.45,depthWrite:false}));root.add(particles);
  scene.add(new THREE.AmbientLight(0xb4c9e0,2.1));const key=new THREE.DirectionalLight(0xffe4b5,3);key.position.set(-3,6,9);scene.add(key);
- function update(time=0,x=0,y=0){pages.forEach(p=>{const b=p.userData;p.position.y=b.y+Math.sin(time*.28+b.index)*.11;p.position.x=b.x+Math.cos(time*.17+b.index)*.06;p.rotation.y=b.angle+Math.sin(time*.22+b.index)*.12;p.rotation.z=b.angle+Math.sin(time*.18+b.index)*.035;});star.rotation.z=time*.015;star.rotation.y=Math.sin(time*.17)*.12;particles.rotation.z=time*.002;root.position.x=x*.15;root.position.y=-y*.1;}
+ function update(time=0,x=0,y=0){flock.update(time,camera.aspect);pages.forEach(p=>{const b=p.userData;p.position.y=b.y+Math.sin(time*.28+b.index)*.11;p.position.x=b.x+Math.cos(time*.17+b.index)*.06;p.rotation.y=b.angle+Math.sin(time*.22+b.index)*.12;p.rotation.z=b.angle+Math.sin(time*.18+b.index)*.035;});star.rotation.z=time*.015;star.rotation.y=Math.sin(time*.17)*.12;particles.rotation.z=time*.002;root.position.x=x*.15;root.position.y=-y*.1;}
  update(0);return{scene,camera,update,dispose(){scene.traverse(o=>{o.geometry?.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose());});gradient.dispose();}};
 }

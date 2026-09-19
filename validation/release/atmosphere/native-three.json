@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "flockLoopFrameMatches": true,
+  "flockSha256": "1b5be78ceb2b1eafadb6dd03acdae3524e8ad3c9ba2c6911a304bba1d02db262",
+  "renderer": "@headless-three/renderer 0.4.3 — native WGPU/Vulkan",
+  "three": "186",
+  "adapter": "Mesa Lavapipe",
+  "icd": "/workspace/scratch/6972da08bfe7/render-runtime/lavapipe/usr/share/vulkan/icd.d/lvp_icd.json",
+  "package": "25.2.8-0ubuntu0.24.04.2",
+  "packageSha256": "b3be471db0ec27eb28c1ea75a4d2e6bb3207c5904bdc3823dbba9ce530026939",
+  "dimensions": [
+    1200,
+    800
+  ],
+  "bytes": 27940,
+  "deterministic": true,
+  "sha256": "ce17872d2ebca39b4ef3da087b9227c14a58a7d9f026a4d9fefc56331b4099e9",
+  "animatedFrameSha256": "f3899afc967075e921ed2e483b20ea25cb6d75a27f693f9b89881a3728ddc121",
+  "productionScene": "src/domains/atmosphere/world.mjs",
+  "systemFilesModified": false
+}

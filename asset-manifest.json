@@ -2,16 +2,20 @@
   "version": 1,
   "assets": [
     {
+      "path": "assets/atmosphere.css",
+      "bytes": 1387
+    },
+    {
       "path": "assets/botanical.webp",
       "bytes": 137908
     },
     {
       "path": "assets/explorer.css",
-      "bytes": 13202
+      "bytes": 13235
     },
     {
       "path": "assets/explorer.js",
-      "bytes": 11442
+      "bytes": 11553
     },
     {
       "path": "assets/favicon.svg",
@@ -46,8 +50,8 @@
       "bytes": 225458
     },
     {
-      "path": "assets/rhyme-world-renderer-PLURKG6D.js",
-      "bytes": 541099
+      "path": "assets/rhyme-world-renderer-ZKG5D4F5.js",
+      "bytes": 547652
     },
     {
       "path": "assets/site.css",
@@ -152,6 +156,18 @@
     {
       "path": "assets/volumes/volume-12.webp",
       "bytes": 41170
+    },
+    {
+      "path": "assets/world/cloud-bank.webp",
+      "bytes": 80174
+    },
+    {
+      "path": "assets/world/cloud-cluster.webp",
+      "bytes": 94150
+    },
+    {
+      "path": "assets/world/cloud-wisp.webp",
+      "bytes": 37206
     },
     {
       "path": "assets/world/cover-atlas.webp",

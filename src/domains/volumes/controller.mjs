@@ -9,6 +9,8 @@ const thumbs=$$('[data-volume]'),covers=$$('[data-cover]'),panels=$$('.volume-pa
 const dialog=$('dialog'),reduced=matchMedia('(prefers-reduced-motion:reduce)');
 let active=-1,view='',settleTimer,world,worldPromise;
 root.classList.add('js');
+const syncVisibility=()=>root.dataset.documentHidden=String(document.hidden);
+document.addEventListener('visibilitychange',syncVisibility);syncVisibility();
 function remember(){if(location.hash!==vm.hash)history.pushState(null,'',vm.hash);}
 function select(index){if(vm.select(index))remember();}
 function show(next){if(vm.show(next))remember();}
