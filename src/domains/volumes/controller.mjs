@@ -23,7 +23,7 @@ vm.subscribe(state=>{
   const previous=covers[active],rect=previous.getBoundingClientRect(),ghost=previous.cloneNode(true);
   ghost.removeAttribute('data-cover');ghost.className='departing-cover';ghost.setAttribute('aria-hidden','true');
   ghost.style.width=`${rect.width}px`;ghost.style.height=`${rect.height}px`;
-  $('.cover-stage').append(ghost);ghost.addEventListener('animationend',()=>ghost.remove(),{once:true});
+  $('.cover-stage').append(ghost);ghost.addEventListener('animationend',()=>ghost.remove(),{once:true});setTimeout(()=>ghost.remove(),520);
  }
  thumbs.forEach((thumb,i)=>thumb.setAttribute('aria-pressed',String(i===state.activeIndex)));
  covers.forEach((cover,i)=>cover.hidden=i!==state.activeIndex);

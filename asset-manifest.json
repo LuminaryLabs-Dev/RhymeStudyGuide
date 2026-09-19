@@ -3,7 +3,7 @@
   "assets": [
     {
       "path": "assets/atmosphere.css",
-      "bytes": 2471
+      "bytes": 2466
     },
     {
       "path": "assets/botanical.webp",
@@ -15,7 +15,7 @@
     },
     {
       "path": "assets/explorer.js",
-      "bytes": 13390
+      "bytes": 13497
     },
     {
       "path": "assets/favicon.svg",
@@ -156,6 +156,18 @@
     {
       "path": "assets/volumes/volume-12.webp",
       "bytes": 41170
+    },
+    {
+      "path": "assets/world/bird-body.png",
+      "bytes": 238621
+    },
+    {
+      "path": "assets/world/bird-wing-left.png",
+      "bytes": 311204
+    },
+    {
+      "path": "assets/world/bird-wing-right.png",
+      "bytes": 289418
     },
     {
       "path": "assets/world/cloud-bank.webp",

@@ -28,4 +28,4 @@ Individual subjects:
 - Wisp: “Long slender wisp, mostly muted slate blue with small warm cream highlights, delicate tapered ends.”
 - Cluster: “Compact asymmetrical cluster of rounded clouds, cobalt and midnight blue shadows, muted cream tops.”
 
-Clouds are image assets; birds are small code-native Three.js meshes, not generated raster images.
+Clouds are image assets. The foreground bird is a generated transparent sprite sheet with three separated parts, exported as `bird-body.png`, `bird-wing-left.png`, and `bird-wing-right.png`. The browser composes those parts per bird and rotates both wings from their attachment points; the shared flock path remains code-native for movement and native Three.js validation.

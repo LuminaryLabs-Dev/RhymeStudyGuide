@@ -1,3 +1,9 @@
+# 2.4.0 — Layered bird rig
+
+- Added a generated transparent bird sprite sheet with separately exported body and wing parts.
+- Replaced the small SVG bird marks with layered browser rigs that flap both wings along the shared Bézier flock path.
+- Added a cleanup fallback for rapid cover changes so the selected book always settles without a stale departing cover.
+
 # 2.3.0 — Foreground atmosphere
 
 - Moved transparent clouds and birds into a fixed foreground layer above the reader.

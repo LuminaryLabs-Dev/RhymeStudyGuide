@@ -6,14 +6,13 @@
 .foreground-atmosphere .cloud-wisp{width:66vw;left:0;top:27%;opacity:.12;animation-duration:190s;animation-delay:-110s}
 .foreground-atmosphere .cloud-cluster{width:40vw;left:0;top:3%;opacity:.13;animation-duration:120s;animation-delay:-72s}
 @keyframes cloud-drift{from{transform:translateX(-100%)}to{transform:translateX(100vw)}}
-.foreground-birds{position:absolute;inset:0;width:100%;height:50%;overflow:visible;pointer-events:none;fill:#031626;filter:drop-shadow(0 1px 2px #f2dfad55)}
-.foreground-bird{transform-box:fill-box;transform-origin:center;opacity:.82}
-.bird-wing{transform-box:fill-box;transform-origin:0 0;animation:bird-wingbeat .72s ease-in-out infinite alternate}
-.bird-wing-right{animation-delay:-.24s}
-.foreground-bird:nth-child(2) .bird-wing{animation-delay:-.13s}.foreground-bird:nth-child(3) .bird-wing{animation-delay:-.31s}.foreground-bird:nth-child(4) .bird-wing{animation-delay:-.47s}
-@keyframes bird-wingbeat{from{transform:rotate(-.36rad)}to{transform:rotate(.32rad)}}
+.foreground-birds{position:absolute;inset:0;width:100%;height:50%;overflow:visible;pointer-events:none;filter:drop-shadow(0 1px 2px #f2dfad55)}
+.foreground-bird{position:absolute;left:var(--bird-x);top:var(--bird-y);width:64px;height:42px;transform:translate(-50%,-50%) rotate(var(--bird-angle)) scale(var(--bird-scale));transform-origin:center;opacity:.9;will-change:transform}
+.bird-part{position:absolute;display:block;object-fit:contain;pointer-events:none;user-select:none}
+.bird-body{z-index:2;left:20px;top:4px;width:38px;height:34px}
+.bird-wing{z-index:1;width:31px;height:36px;top:3px;will-change:transform}
+.bird-wing-left{left:0;transform-origin:100% 52%;transform:rotate(calc(var(--wing-flap) * -1))}
+.bird-wing-right{left:33px;transform-origin:0 52%;transform:rotate(var(--wing-flap))}
 html[data-motion=on]:not([data-document-hidden=true]):not([data-layout=standard]) .foreground-atmosphere .cloud{animation-play-state:running}
 html[data-motion=off] .foreground-atmosphere .cloud,.foreground-atmosphere[data-paused=true] .cloud{animation-play-state:paused!important}
-html[data-motion=off] .foreground-atmosphere .bird-wing,.foreground-atmosphere[data-paused=true] .bird-wing{animation-play-state:paused!important}
-@media(prefers-reduced-motion:reduce){html .foreground-atmosphere .cloud,html .foreground-atmosphere .bird-wing{animation-play-state:paused!important}}
-@media(max-width:700px){.foreground-atmosphere .cloud-bank{width:110vw;top:8%;opacity:.11}.foreground-atmosphere .cloud-wisp{display:none}.foreground-atmosphere .cloud-cluster{width:85vw;top:25%;opacity:.08}.foreground-birds{height:48%}}
+@media(max-width:700px){.foreground-atmosphere .cloud-bank{width:110vw;top:8%;opacity:.11}.foreground-atmosphere .cloud-wisp{display:none}.foreground-atmosphere .cloud-cluster{width:85vw;top:25%;opacity:.08}.foreground-birds{height:48%}.foreground-bird{width:46px;height:31px}.bird-body{left:14px;top:3px;width:27px;height:25px}.bird-wing{width:23px;height:27px;top:2px}.bird-wing-right{left:23px}}
